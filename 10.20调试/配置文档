@@ -1,0 +1,167 @@
+《今天吃什么》程序使用说明
+
+appid:wxe8904be0be2a176b
+登录邮箱:licuicui159@126.com
+密码:weidongdong1212
+原始ID:gh_44fac6a5f261
+
+微信开发者工具介绍
+https://developers.weixin.qq.com/miniprogram/dev/devtools/page.html#%E5%90%AF%E5%8A%A8%E9%A1%B5
+
+接口调试工具：Postman
+
+虚拟环境安装及创建
+pip install --upgrade pip
+sudo apt-get install python-virtualenv
+sudo easy_install virtualenvwrapper
+# source virtualenvwrapper.sh
+mkvirtualenv Flask_py
+workon Flask_py
+
+第一步：
+设置数据库config,py
+class DevelopmentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/eat'
+
+linux终端执行
+cd PythonProject/WhatToEat/WhatToEat
+python3 manage.py runserver
+
+后台管理页面修改
+http://127.0.0.1:5000/admin/
+
+1.版权修改admin.html  
+替换第86行
+   <footer class="main-footer" style="text-align:center" >
+        <strong>版权 &copy; 2019 归 <a href="">超级7日组</a></strong> 所有
+    </footer>
+
+2.控制面板index.html  
+替换 第12行 <section></section 部分
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">项目简介</h3>
+                </div>
+                <div class="box-body">
+                    <p>
+                        不论是上班族还是学生党，“今天吃什么？”可能是思考频率最高的事情，与其为“今天吃什么”而烦恼，不如开发一个小程序，让程序帮你解决吃什么的困扰。这次，我们使用Flask框架为小程序提供API接口，开发了一款解决“选择困难症”人群选择问题的小程序——今天吃什么。
+                    <p></p>
+                    <b>小程序模块</b>
+                    <p></p>
+                    为了满足用户通过【今天吃什么】小程序来随机选择美食的需要,本系统具备以下功能:
+                    <p></p>
+                    1.小程序授权登录功能,只有用户通过授权后才能使用小程序；
+                    <br>2.菜系分类功能,菜系分类可在后台配置；
+                    <br>3.随机选择美食功能；
+                    <br>4.查看美食菜谱功能,用户可查看菜谱详细步骤；
+                    <br>5.百度地图查看商家地址功能；
+                    <br>6.自主上传美食功能；
+                    <br>7.统计选中美食功能；
+                    <br>8.后台系统功能,管理员可管理菜系、管理美食,管理会员等。
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">使用指南</h3>
+                </div>
+                <div class="box-body">
+                    <b>启动调试</b>
+                    <p></p>
+                    1.启动WhatToEat/WhatToEat下的venv虚拟环境，运行python3 manage.py
+                    runserver命令启动Flask。
+                    <br>2.打开微信开发者工具并扫码登录，选择WhatToEat/Mina小程序，加载完成后进入小程序登录页面。
+                    <br>3.单击“微信登录”提示微信授权。单击“允许”按钮，即可进入到小程序首页。
+                    <br>
+                    <p></p>
+                    <b>小程序首页</b>
+                    <p></p>
+                    1.在首页默认从全部菜系中进行筛选，也可以根据菜系分类进行筛选，点击选择菜系即可查看菜系。
+                    <br>2.单击“开始”按钮，类似跑马灯效果，开始随机筛选。单击“停止”按钮，选中一个美食。单击“换一个”按钮，重新筛选，单击“好”按钮，选中美食并进入选择页面。
+                    <br>3.单击“亲自下厨”按钮，进入菜谱列表页面。选中一个菜谱，进入菜谱详情页面。在菜谱详情页，单击图片可以放大图片，再次单击图片会退出全图。
+                    <br>4.回到选择亲自下厨或者大吃大喝页面，当单击“大吃大喝”按钮弹出获取地理位置弹窗。单击“确定”按钮，跳转到商家地址列表。
+                    <br>5.在小程序首页，单击底部“添加美食”菜单，可以自主添加美食。单击“统计”菜单，显式选择美食的统计信息。
+                    <p></p>
+                    <b>小程序后台</b>
+                    <p></p>
+                    1.管理员可以通过账号密码来管理后台。
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;账号信息如下：
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;账号：mr
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;密码：mrsoft
+                    <br>2.在浏览器中输入网址“http://127.0.0.1:5000/admin”进入后台登录页。
+                    <br>输入账号和密码，登录成功后进入后台主页。
+                    <br>3.在后台主页可以管理菜系，管理美食，可以修改密码。
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+********************************************************************
+
+数据库的设置
+Flask选择更方便的SQLALchemy，类似于Django的ORM。通过Python对象来操作数据库，在舍弃一些性能开销的同时，换来的是开发效率的较大提升。
+
+数据库安装
+
+安装服务端
+sudo apt-get install mysql-server
+
+安装客户端
+sudo apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+
+数据库的基本命令
+
+登录数据库
+mysql -u root -p
+
+创建数据库，并设定编码
+create database <数据库名> charset=utf8;
+
+显示所有数据库
+show databases;
+
+在Flask中使用mysql数据库，需要安装一个flask-sqlalchemy的扩展。
+pip install flask-sqlalchemy
+
+要连接mysql数据库，仍需要安装flask-mysqldb
+pip install flask-mysqldb
+
+Flask的数据库设置：
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mysql@127.0.0.1:3306/test3'
+
+
+*******************************************************************************************
+
+window终端执行命令
+C:\Users\yy>i:
+cd I:\whattoeat\WhatToEat\WhatToEat>
+
+
+安装虚拟环境
+pip install Virtualenv
+pip install requests
+
+I:\whattoeat\WhatToEat\WhatToEat>python manage.py runserver
+
+
+启动WhatToEat/WhatToEat下的venv虚拟环境，运行python manage.py runserver命令启动Flask。
+然后打开微信开发者工具并扫码登录，选择WhatToEat/Mina小程序，加载完成后进入小程序登录页面，如图1所示。单击“微信登录”提示微信授权，如图2所示。单击“允许”按钮，即可进入到小程序首页。如图3所示。
+             
+******************************************************************************************************************
+
+查看目录文件夹
+I:\whattoeat\WhatToEat>dir
+查看文件内容
+Type I:\whattoeat\WhatToEat\WhatToEat\manage.py
+
+解决Python脚本提示“no module named migrate”
+这时候只需要执行:
+pip install sqlalchemy
+pip install sqlalchemy-migrate
